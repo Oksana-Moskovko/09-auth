@@ -1,10 +1,10 @@
 "use client";
 
 import css from "../NoteForm/NoteForm.module.css";
-import { createNote, NewNote } from "../../lib/api";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
+import { createNote, CreateNoteData } from "@/lib/api/clientApi";
 
 export default function NoteForm() {
   const router = useRouter();
@@ -24,13 +24,13 @@ export default function NoteForm() {
     >
   ) => {
     setDraft({
-      ...(draft as NewNote),
-      [event.target.name as keyof NewNote]: event.target.value,
+      ...(draft as CreateNoteData),
+      [event.target.name as keyof CreateNoteData]: event.target.value,
     });
   };
 
   const handleSubmit = (formData: FormData) => {
-    const values = Object.fromEntries(formData) as NewNote;
+    const values = Object.fromEntries(formData) as CreateNoteData;
     console.log(values);
     mutate(values);
   };

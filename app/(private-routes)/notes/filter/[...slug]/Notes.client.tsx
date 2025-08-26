@@ -9,8 +9,8 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 import NoteList from "@/components/NoteList/NoteList";
 import { Note } from "@/types/note";
-import { fetchNotes } from "@/lib/api";
 import Link from "next/link";
+import { fetchNotes } from "@/lib/api/clientApi";
 
 type NotesPageProps = {
   initialData: {

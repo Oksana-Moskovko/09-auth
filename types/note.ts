@@ -4,6 +4,7 @@ export interface Note {
   content: string;
   createdAt: string;
   updatedAt: string;
+  userId: string;
   tag: NoteTag;
 }
 
@@ -16,5 +17,5 @@ export type Tag = {
   tag: NoteTag;
 };
 
-export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
-export const tags = ["Work", "Todo", "Personal", "Meeting", "Shopping"];
+export type NoteTag = "Work" | "Personal" | "Meeting" | "Shopping" | "Ideas" | "Travel" | "Finance" | "Health" | "Important" | "Todo";
+export const tags = ["Work", "Personal", "Meeting", "Shopping", "Ideas", "Travel", "Finance", "Health", "Important", "Todo"];

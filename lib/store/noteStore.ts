@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { persist } from 'zustand/middleware';
-import { NewNote } from "../api";
+import { CreateNoteData } from "../api/clientApi";
 
 type NoteDraftStore = {
-    draft: NewNote;
-    setDraft: (note: NewNote) => void;
+    draft: CreateNoteData;
+    setDraft: (note: CreateNoteData) => void;
     clearDraft: () => void;
 };
 
-const initialDraft: NewNote = {
+const initialDraft: CreateNoteData = {
   title: '',
   content: '',
   tag: "Todo",

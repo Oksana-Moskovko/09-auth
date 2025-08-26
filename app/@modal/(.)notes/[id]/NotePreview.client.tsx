@@ -3,8 +3,8 @@
 import css from "./NotePreview.module.css";
 import Modal from "@/components/Modal/Modal";
 import { useQuery } from "@tanstack/react-query";
-import { fetchNoteById } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { getSingleNote } from "@/lib/api/clientApi";
 
 interface NotePreviewClientProps {
   id: string;
@@ -19,7 +19,7 @@ const NotePreviewClient = ({ id }: NotePreviewClientProps) => {
     isLoading,
   } = useQuery({
     queryKey: ["note", id],
-    queryFn: () => fetchNoteById(id),
+    queryFn: () => getSingleNote(id),
     refetchOnMount: false,
   });
   // console.log("note", id);
