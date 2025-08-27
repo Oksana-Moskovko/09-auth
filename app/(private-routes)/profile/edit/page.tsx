@@ -9,7 +9,7 @@ import { useAuthStore } from "@/lib/store/authStore";
 
 const EditProfile = () => {
   const router = useRouter();
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
 
@@ -29,9 +29,14 @@ const EditProfile = () => {
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const updatedUser = await updateMe({ userName });
-    setUser(updatedUser);
-    router.push("/profile");
+    try {
+      const updatedUser = await updateMe({ username });
+      setUser(updatedUser);
+      router.push("/profile");
+    } catch (error) {
+      console.log("Oops, some error:", error);
+      alert("Oops, something went wrong");
+    }
   };
 
   return (
@@ -56,7 +61,7 @@ const EditProfile = () => {
             <input
               id="username"
               type="text"
-              value={userName}
+              value={username}
               onChange={handleChange}
               className={css.input}
             />

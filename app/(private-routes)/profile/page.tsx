@@ -4,8 +4,6 @@ import Image from "next/image";
 import { getServerMe } from "@/lib/api/serverApi";
 import { Metadata } from "next";
 
-//Додайте на сторінку профілю усі небхідні meta-теги.
-
 export async function generateMetadata(): Promise<Metadata> {
   const user = await getServerMe();
 
@@ -13,19 +11,19 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `Profile ${user.username} `,
     description: `Profile page for ${user.username} with email ${user.email}`,
     openGraph: {
-      title: `${user.username} Profile`,
+      title: `Profile ${user.username} `,
       description: `Profile page for ${user.username} with email ${user.email}`,
       url: "https://notehub.com/profile",
       siteName: "NoteHub",
       images: [
         {
-          url: user.avatar,
-          width: 400,
-          height: 400,
-          alt: `${user.username} Avatar`,
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: "NoteHub",
         },
       ],
-      type: "profile",
+      type: "article",
     },
   };
 }

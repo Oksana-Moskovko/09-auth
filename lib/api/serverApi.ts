@@ -1,12 +1,12 @@
 import { cookies } from 'next/headers'
 import { nextServer } from './api'
-import { CheckSessionRequest } from './clientApi'
+// import { CheckSessionRequest } from './clientApi'
 import { User } from '@/types/user'
 import { Note } from '@/types/note'
 
 export const checkServerSession = async () => {
   const cookieStore = await cookies()
-  const res = await nextServer.get<CheckSessionRequest>(`/auth/session`, {
+  const res = await nextServer.get(`/auth/session`, {
     headers: { Cookie: cookieStore.toString() },
   })
   return res
@@ -29,7 +29,7 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-export const fetchNotes = async (
+export const fetchServerNotes = async (
   page: number,
   perPage: 12,
   search: string = "",
@@ -51,7 +51,7 @@ export const fetchNotes = async (
   return response.data;
 };
 
-export const fetchNoteById = async (id: string) => {
+export const fetchServerNoteById = async (id: string) => {
   const cookieStore = await cookies();
 
   const response = await nextServer.get<Note>(`/notes/${id}`, {

@@ -10,8 +10,7 @@ import Pagination from "@/components/Pagination/Pagination";
 import NoteList from "@/components/NoteList/NoteList";
 import { Note } from "@/types/note";
 import Link from "next/link";
-import { fetchNotes } from "@/lib/api/serverApi";
-// import { fetchNotes } from "@/lib/api/clientApi";
+import { fetchNotes } from "@/lib/api/clientApi";
 
 type NotesPageProps = {
   initialData: {

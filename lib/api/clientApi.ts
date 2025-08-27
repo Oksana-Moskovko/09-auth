@@ -33,24 +33,29 @@ export type LoginRequest = {
   password: string;
 };
 
-// export const fetchNotes = async (
-//   { page = 1, perPage = 10, search = "" }: FetchNotesParams = {},
-//   tag?: string
-// ) => {
-//   const params: Record<string, string | number> = { page, perPage };
 
-//   if (search.trim()) params.search = search.trim();
-//   if (tag && tag !== 'All') params.tag = tag;
+export const fetchNotes = async (
+  page: number,
+  perPage: number,
+  search: string = "",
+  tag?: string
+): Promise<NoteListType> => {
+  const response = await nextServer.get<NoteListType>("/notes", {
+    params: {
+      page,
+      perPage,
+      ...(search.trim() ? { search } : {}),
+      ...(tag && tag !== "All" ? { tag } : {}),
+    },
+  });
 
-//   const { data } = await api.get<NoteListType>("/notes", { params });
-//   return data;
-// };
+  return response.data;
+};
 
-// export const getSingleNote = async (id: string) => {
-//   const { data } = await api.get<Note>(`/notes/${id}`)
-//   return data
-// }
-
+export const fetchNoteById = async (id: string) => {
+  const response = await nextServer.get<Note>(`/notes/${id}`);
+  return response.data;
+};
 export const createNote = async (newNote: CreateNoteData): Promise<Note> => {
   const response = await nextServer.post<Note>("/notes", newNote);
   return response.data;
@@ -76,11 +81,6 @@ export const checkSession = async () => {
   return res.data.success;
 };
 
-export const getMe = async () => {
-  const { data } = await nextServer.get<User>('/users/me');
-  return data;
-};
-
 export const logout = async (): Promise<void> => {
   await nextServer.post('/auth/logout')
 };
@@ -88,7 +88,12 @@ export const logout = async (): Promise<void> => {
 
 
 export type UpdateUserRequest = {
-  userName?: string;
+  username?: string;
+};
+
+export const getMe = async () => {
+  const { data } = await nextServer.get<User>('/users/me');
+  return data;
 };
 
 export const updateMe = async (payload: UpdateUserRequest) => {
