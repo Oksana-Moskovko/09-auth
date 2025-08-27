@@ -7,7 +7,7 @@ import { register, RegisterRequest } from "@/lib/api/clientApi";
 import { ApiError } from "@/app/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
 
-const SingUp = () => {
+const SignUp = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const setUser = useAuthStore((state) => state.setUser);
@@ -68,4 +68,4 @@ const SingUp = () => {
   );
 };
 
-export default SingUp;
+export default SignUp;

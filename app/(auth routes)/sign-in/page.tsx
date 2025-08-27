@@ -16,7 +16,6 @@ const SignIn = () => {
     try {
       const formValues = Object.fromEntries(formData) as LoginRequest;
       const res = await login(formValues);
-
       if (res) {
         setUser(res);
         router.push("/profile");
