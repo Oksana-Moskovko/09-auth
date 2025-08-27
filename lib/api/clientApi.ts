@@ -1,6 +1,6 @@
-import { api } from "@/app/api/api";
 import { Note, NoteTag } from "@/types/note";
 import { User } from "@/types/user";
+import { nextServer } from "./api";
 
 export type RegisterRequest = {
   email: string;
@@ -52,37 +52,37 @@ export type LoginRequest = {
 // }
 
 export const createNote = async (newNote: CreateNoteData): Promise<Note> => {
-  const response = await api.post<Note>("/notes", newNote);
+  const response = await nextServer.post<Note>("/notes", newNote);
   return response.data;
 };
 
 export const deleteNote = async (noteId: string): Promise<Note> => {
-  const { data } = await api.delete<Note>(`/notes/${noteId}`);
+  const { data } = await nextServer.delete<Note>(`/notes/${noteId}`);
   return data;
 };
 
 export const login = async (data: LoginRequest) => {
-  const res = await api.post<User>('/auth/login', data);
+  const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
 };
 
 export const register = async (data: RegisterRequest) => {
-  const res = await api.post<User>('/auth/register', data);
+  const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
 };
 
 export const checkSession = async () => {
-  const res = await api.get<CheckSessionRequest>('/auth/session');
+  const res = await nextServer.get<CheckSessionRequest>('/auth/session');
   return res.data.success;
 };
 
 export const getMe = async () => {
-  const { data } = await api.get<User>('/users/me');
+  const { data } = await nextServer.get<User>('/users/me');
   return data;
 };
 
 export const logout = async (): Promise<void> => {
-  await api.post('/auth/logout')
+  await nextServer.post('/auth/logout')
 };
 
 
@@ -92,6 +92,6 @@ export type UpdateUserRequest = {
 };
 
 export const updateMe = async (payload: UpdateUserRequest) => {
-  const res = await api.patch<User>('/users/me', payload);
+  const res = await nextServer.patch<User>('/users/me', payload);
   return res.data;
 };
