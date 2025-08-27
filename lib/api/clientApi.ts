@@ -33,23 +33,23 @@ export type LoginRequest = {
   password: string;
 };
 
-export const fetchNotes = async (
-  { page = 1, perPage = 10, search = "" }: FetchNotesParams = {},
-  tag?: string
-) => {
-  const params: Record<string, string | number> = { page, perPage };
+// export const fetchNotes = async (
+//   { page = 1, perPage = 10, search = "" }: FetchNotesParams = {},
+//   tag?: string
+// ) => {
+//   const params: Record<string, string | number> = { page, perPage };
 
-  if (search.trim()) params.search = search.trim();
-  if (tag && tag !== 'All') params.tag = tag;
+//   if (search.trim()) params.search = search.trim();
+//   if (tag && tag !== 'All') params.tag = tag;
 
-  const { data } = await api.get<NoteListType>("/notes", { params });
-  return data;
-};
+//   const { data } = await api.get<NoteListType>("/notes", { params });
+//   return data;
+// };
 
-export const getSingleNote = async (id: string) => {
-  const { data } = await api.get<Note>(`/notes/${id}`)
-  return data
-}
+// export const getSingleNote = async (id: string) => {
+//   const { data } = await api.get<Note>(`/notes/${id}`)
+//   return data
+// }
 
 export const createNote = async (newNote: CreateNoteData): Promise<Note> => {
   const response = await api.post<Note>("/notes", newNote);

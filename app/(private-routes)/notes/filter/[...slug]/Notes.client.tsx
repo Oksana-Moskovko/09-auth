@@ -10,7 +10,8 @@ import Pagination from "@/components/Pagination/Pagination";
 import NoteList from "@/components/NoteList/NoteList";
 import { Note } from "@/types/note";
 import Link from "next/link";
-import { fetchNotes } from "@/lib/api/clientApi";
+import { fetchNotes } from "@/lib/api/serverApi";
+// import { fetchNotes } from "@/lib/api/clientApi";
 
 type NotesPageProps = {
   initialData: {
@@ -38,10 +39,10 @@ const NotesPage = ({ initialData, tag }: NotesPageProps) => {
 
   const { data, isSuccess } = useQuery({
     queryKey: ["notes", searchQuery, tag, currentPage],
-    queryFn: () =>
-      fetchNotes({ search: searchQuery, page: currentPage, perPage: 12 }, tag),
+    queryFn: () => fetchNotes(currentPage, 12, searchQuery, tag),
     placeholderData: keepPreviousData,
-    initialData,
+    initialData:
+      currentPage === 1 && searchQuery === "" ? initialData : undefined,
   });
   // console.log("Fetched data:", data);
 

@@ -1,5 +1,3 @@
-// Zustand-стор
-
 import { User } from "@/types/user";
 import { create } from "zustand";
 

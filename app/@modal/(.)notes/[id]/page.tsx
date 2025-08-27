@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import NoteDetailsClient from "./NotePreview.client";
-import { getSingleNote } from "@/lib/api/clientApi";
+import { fetchNoteById } from "@/lib/api/serverApi";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -17,7 +17,7 @@ const NotePreview = async ({ params }: Props) => {
 
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
-    queryFn: () => getSingleNote(id),
+    queryFn: () => fetchNoteById(id),
   });
 
   return (
